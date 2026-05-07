@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #fffbf1;
+  --color-primary: #045c19;
+  --color-primary-light: #067a22;
+  --color-glass-bg: rgba(4, 92, 25, 0.08);
+  --color-glass-border: rgba(4, 92, 25, 0.15);
+  --color-white: #ffffff;
+  
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-glass: 0 8px 32px 0 rgba(4, 92, 25, 0.12);
+  --shadow-glow: 0 0 25px rgba(4, 92, 25, 0.25);
+  
+  --radius-sm: 8px; /* Slightly softer than 5px for modern feel */
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s var(--transition-normal) forwards;
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s var(--transition-normal) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Liquid Glass Elements */
+.liquid-glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-bounce);
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.btn-glass {
+  background: rgba(4, 92, 25, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-primary);
+  border: 1px solid rgba(4, 92, 25, 0.3);
+  box-shadow: 0 4px 15px rgba(4, 92, 25, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: all 0.6s ease;
+}
+
+.btn-glass:hover {
+  transform: translateY(-4px) scale(1.03);
+  background: rgba(4, 92, 25, 0.15);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(4, 92, 25, 0.5);
+}
+
+.btn-glass:hover::before {
+  left: 100%;
+}
+
+.btn-glass:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Typography */
+.text-primary { color: var(--color-primary); }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-4xl { font-size: 2.25rem; line-height: 1.2; }
+.text-5xl { font-size: 3.5rem; line-height: 1.1; letter-spacing: -1px; }
+
+@media (max-width: 768px) {
+  .text-4xl { font-size: 1.875rem; }
+  .text-5xl { font-size: 2.5rem; }
+  .container { padding: 0 1.25rem; }
+}
+
+/* Layout Specifics */
+.section-padding {
+  padding: 6rem 0;
+}

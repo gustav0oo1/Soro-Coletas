@@ -1,0 +1,145 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(4, 92, 25, 0.04) 0%, rgba(255, 251, 241, 0) 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-subtitle {
+  margin-top: 1.5rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  margin-top: 3rem;
+}
+
+.btn-large {
+  padding: 1.25rem 3.5rem;
+  font-size: 1.125rem;
+}
+
+/* Visual Side with Glass Cards */
+.hero-visual {
+  position: relative;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glass-card {
+  border-radius: var(--radius-lg);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+.main-card {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4/5;
+  padding: 1.25rem;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s ease;
+}
+
+.inner-card {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.main-card:hover {
+  transform: translateY(-10px) rotate(2deg);
+  box-shadow: 0 20px 40px rgba(4, 92, 25, 0.2);
+}
+
+.main-card:hover .hero-image {
+  transform: scale(1.05);
+}
+
+.glass-decoration {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.glass-dec-1 {
+  width: 180px;
+  height: 180px;
+  top: 5%;
+  right: -5%;
+}
+
+.glass-dec-2 {
+  width: 250px;
+  height: 250px;
+  bottom: -5%;
+  left: -15%;
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+  
+  .hero-content {
+    margin: 0 auto;
+  }
+  
+  .hero-visual {
+    height: 450px;
+  }
+  
+  .hero::before {
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100vw;
+  }
+}
