@@ -42,14 +42,14 @@ export const MapaColetas: React.FC = () => {
           </iframe>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
           {ecopontos.map((ponto, index) => (
             <div 
               key={ponto.id} 
               className={`liquid-glass animate-float delay-${(index + 1) * 100}`} 
               onClick={() => setSelectedLocation(ponto.endereco)}
               style={{ 
-                padding: '2.5rem', 
+                padding: '1.5rem', 
                 borderRadius: 'var(--radius-md)', 
                 cursor: 'pointer',
                 border: selectedLocation === ponto.endereco ? '2px solid var(--color-primary)' : '1px solid var(--color-glass-border)',
