@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { supabase } from '../lib/supabase';
 import './SurveyModal.css';
 
 const SURVEY_KEY = 'soro_coletas_survey_done';
@@ -82,6 +83,7 @@ const questions: Question[] = [
 
 export const SurveyModal: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,12 +92,30 @@ export const SurveyModal: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    const done = localStorage.getItem(SURVEY_KEY);
-    if (!done) {
-      const timer = setTimeout(() => setIsVisible(true), 1200);
-      return () => clearTimeout(timer);
-    }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      const done = localStorage.getItem(SURVEY_KEY);
+      if (!done) {
+        const timer = setTimeout(() => setIsVisible(true), 1200);
+        return () => clearTimeout(timer);
+      }
+    } else if (isAuthenticated === false) {
+      setIsVisible(false);
+    }
+  }, [isAuthenticated]);
 
   const handleAnswer = (option: string) => {
     const newAnswers = { ...answers, [currentQuestion]: option };
