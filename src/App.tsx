@@ -8,12 +8,14 @@ import { Login } from './pages/Auth/Login';
 import { Cadastro } from './pages/Auth/Cadastro';
 import { MapaColetas } from './pages/MapaColetas';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { SurveyModal } from './components/SurveyModal';
 import './index.css';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <SurveyModal />
         <Navbar />
         <main className="main-content" style={{ flex: 1, paddingTop: '80px' }}>
           <Routes>
